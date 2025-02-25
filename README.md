@@ -1,9 +1,5 @@
 # attendance-management-system
 
-
-Here's a clean, professional README tailored to highlight your backend engineering skills and Java/Spring Boot learning:
-
-
 # Attendance Management System
 
 A scalable backend system for role-based attendance tracking, built with Java and Spring Boot.
