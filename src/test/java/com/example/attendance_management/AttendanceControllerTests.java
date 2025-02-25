@@ -34,14 +34,9 @@ class AttendanceControllerTests {
 
     @Test
     void addAttendee_Success() throws Exception {
-        // Arrange
         String name = "Alice";
         doNothing().when(attendanceService).addAttendee(any(Attendee.class));
-
-        // Act
         ResponseEntity<?> response = controller.addAttendee(name);
-
-        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().toString().contains("Attendee added successfully"));
         verify(attendanceService, times(1)).addAttendee(any(Attendee.class));
@@ -49,14 +44,9 @@ class AttendanceControllerTests {
 
     @Test
     void addAttendee_Failure() throws Exception {
-        // Arrange
         String name = "Bob";
         doThrow(new RuntimeException("Error adding attendee")).when(attendanceService).addAttendee(any(Attendee.class));
-
-        // Act
         ResponseEntity<?> response = controller.addAttendee(name);
-
-        // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertTrue(response.getBody().toString().contains("Failed to add attendee"));
         verify(attendanceService, times(1)).addAttendee(any(Attendee.class));
