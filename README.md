@@ -1,5 +1,3 @@
-# attendance-management-system
-
 # Attendance Management System
 
 A scalable backend system for role-based attendance tracking, built with Java and Spring Boot.
