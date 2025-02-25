@@ -15,4 +15,8 @@ public class Organization {
         this.name = name;
         this.type = type;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }

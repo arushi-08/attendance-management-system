@@ -1,27 +1,42 @@
 package com.example.attendance_management;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-public class AttendanceManagementApplication implements CommandLineRunner {
-
-	@Autowired
-	private AttendanceService attendanceService;
+@RestController
+public class AttendanceManagementApplication {
 
 	@Autowired
 	private Organization organization;
+
+	@Autowired
+	private AttendanceService attendanceService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AttendanceManagementApplication.class, args);
 	}
 
-	@Override
-	public void run(String[] args) throws Exception {
-		Attendee attendee = new Attendee("Arushi", organization);
-		attendanceService.addAttendee(attendee);
+	@PostMapping("/attendee/add")
+	public ResponseEntity<?> addAttendee(@RequestBody String name) throws Exception {
+		try {
+			Attendee attendee = new Attendee(name, organization);
+			attendanceService.addAttendee(attendee);
+			return ResponseEntity.ok("Attendee added successfully");
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().body(Map.of("error", "Invalid input: " + e.getMessage()));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+					"Failed to add attendee: " + e.getMessage());
+		}
 	}
 
 }

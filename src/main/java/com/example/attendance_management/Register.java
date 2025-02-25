@@ -15,6 +15,6 @@ public class Register {
 
     public void addAttendee(AttendanceRecord record) {
         this.attendanceRecords.add(record);
-        System.out.println("Record added to register");
+        System.out.println("Record added to register ");
     }
 }

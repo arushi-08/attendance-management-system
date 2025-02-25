@@ -9,4 +9,10 @@ public class AppConfig {
     public Organization organization() {
         return new Organization("University of Pittsburgh");
     }
+
+    @Bean
+    public Admin admin() {
+        return new Admin("Jean Wenner");
+    }
+
 }
